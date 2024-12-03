@@ -1,16 +1,17 @@
-import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
+import { BootMixin } from '@loopback/boot';
+import { ApplicationConfig } from '@loopback/core';
 import {
   RestExplorerBindings,
   RestExplorerComponent,
 } from '@loopback/rest-explorer';
-import {RepositoryMixin} from '@loopback/repository';
-import {RestApplication} from '@loopback/rest';
-import {ServiceMixin} from '@loopback/service-proxy';
+import { RepositoryMixin } from '@loopback/repository';
+import { RestApplication } from '@loopback/rest';
+import { ServiceMixin } from '@loopback/service-proxy';
 import path from 'path';
-import {MySequence} from './sequence';
+import { MySequence } from './sequence';
+//  import { fileUploadMiddleware } from './middlewares/file-upload.middleware';
 
-export {ApplicationConfig};
+export { ApplicationConfig };
 
 export class BooksApiApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -18,23 +19,22 @@ export class BooksApiApplication extends BootMixin(
   constructor(options: ApplicationConfig = {}) {
     super(options);
 
-    // Set up the custom sequence
+    //  this.middleware(fileUploadMiddleware);
     this.sequence(MySequence);
 
-    // Set up default home page
+
     this.static('/', path.join(__dirname, '../public'));
 
-    // Customize @loopback/rest-explorer configuration here
+
     this.configure(RestExplorerBindings.COMPONENT).to({
       path: '/explorer',
     });
     this.component(RestExplorerComponent);
 
     this.projectRoot = __dirname;
-    // Customize @loopback/boot Booter Conventions here
+
     this.bootOptions = {
       controllers: {
-        // Customize ControllerBooter Conventions here
         dirs: ['controllers'],
         extensions: ['.controller.js'],
         nested: true,
@@ -42,3 +42,36 @@ export class BooksApiApplication extends BootMixin(
     };
   }
 }
+
+
+
+
+// // src/application.ts
+// import { BootMixin } from '@loopback/boot';
+// import { ApplicationConfig } from '@loopback/core';
+// import { RestApplication } from '@loopback/rest';
+// import { ServiceMixin } from '@loopback/service-proxy';
+// import { RepositoryMixin } from '@loopback/repository';
+// import { fileUploadMiddleware } from './middlewares/file-upload.middleware'; 
+
+// export { ApplicationConfig };
+
+// export class BooksApiApplication extends BootMixin(
+//   ServiceMixin(RepositoryMixin(RestApplication)),
+// ) {
+//   constructor(options: ApplicationConfig = {}) {
+//     super(options);
+
+//     this.middleware(fileUploadMiddleware);
+
+//     this.projectRoot = __dirname;
+
+//     this.bootOptions = {
+//       controllers: {
+//         dirs: ['controllers'],
+//         extensions: ['.controller.js'],
+//         nested: true,
+//       },
+//     };
+//   }
+// }

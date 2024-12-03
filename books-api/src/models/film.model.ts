@@ -27,11 +27,11 @@ export class Film extends Entity {
   })
   category: string;
 
-  @property({
-    type: 'number',
-    required: true,
-  })
-  length: number;
+  // @property({
+  //   type: 'number',
+  //   required: false,
+  // })
+  // length: number;
 
   @property({
     type: 'string',
@@ -45,6 +45,12 @@ export class Film extends Entity {
   })
   actors: string;
 
+  @property({
+    type: 'string',
+    required: true,
+  })
+  file: string;
+
 
   constructor(data?: Partial<Film>) {
     super(data);
@@ -52,12 +58,12 @@ export class Film extends Entity {
 }
 
 export interface FilmRelations {
-  // describe navigational properties here
+
 }
 
-interface FilmResponse {
-  response: string;
-  data: Film;
-}
+// interface FilmResponse {
+//   response: string;
+//   data: Film;
+// }
 
 export type FilmWithRelations = Film & FilmRelations;

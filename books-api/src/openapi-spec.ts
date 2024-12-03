@@ -1,9 +1,7 @@
 import {ApplicationConfig} from '@loopback/core';
 import {BooksApiApplication} from './application';
 
-/**
- * Export the OpenAPI spec from the application
- */
+
 async function exportOpenApiSpec(): Promise<void> {
   const config: ApplicationConfig = {
     rest: {

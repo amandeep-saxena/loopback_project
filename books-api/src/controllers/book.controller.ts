@@ -64,15 +64,12 @@ export class BookController {
   @response(200, { })
   async findById(
     @param.path.string('id') id: string
-    // @param.filter(Book, { exclude: 'where' }) filter?: FilterExcludingWhere<Book>
   ): Promise<Book> {
     return this.bookRepository.findById(id);
   }
 
   @patch('/books/{id}')
-  @response(204, {
-    description: 'Book PATCH success',
-  })
+  @response(204)
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({})
